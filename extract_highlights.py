@@ -5,12 +5,16 @@ Created on Thu Jun  1 17:42:21 2023
 @author: Aneesh R Bhat
 """
 import sys
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 
 user_input = input('Enter the file name: ')
 try:
     handle = open(user_input, 'r', encoding='utf8')
-    soup = BeautifulSoup(handle, 'html.parser')
+    try: 
+        soup = BeautifulSoup(handle, 'html.parser')
+    except NameError:
+        print("BeautifulSoup library not installed")
+        sys.exit()
 except FileNotFoundError:
     print('File not found: {}'.format(user_input))
     sys.exit()
