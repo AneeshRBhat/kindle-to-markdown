@@ -5,18 +5,19 @@ Created on Thu Jun  1 17:42:21 2023
 @author: Aneesh R Bhat
 """
 import sys
-#from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
-user_input = input('Enter the file name: ')
+getHTML = input('Enter the file name: ')
+MD_path = input('Enter the path to send the markdown file to: ')
 try:
-    handle = open(user_input, 'r', encoding='utf8')
+    handle = open(getHTML, 'r', encoding='utf8')
     try: 
         soup = BeautifulSoup(handle, 'html.parser')
     except NameError:
         print("BeautifulSoup library not installed")
         sys.exit()
 except FileNotFoundError:
-    print('File not found: {}'.format(user_input))
+    print('File not found: {}'.format(getHTML))
     sys.exit()
 
 
@@ -44,7 +45,12 @@ for tag in tags:
     else: 
         continue
 
-md = open(bookTitle+'.md', 'w', encoding='utf8')
+bookPath = MD_path + '/' + bookTitle + '.md'
+try:
+    md = open(bookPath, 'w', encoding='utf8')
+except FileNotFoundError:
+    print("Invalid path")
+    sys.exit()
 md.write('# ' + bookTitle + '\n')
 md.write('---\n' + 'author: ')
 for author in bookAuthors:
