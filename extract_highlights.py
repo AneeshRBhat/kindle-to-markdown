@@ -51,14 +51,13 @@ try:
 except FileNotFoundError:
     print("Invalid path")
     sys.exit()
-md.write('# ' + bookTitle + '\n')
 md.write('---\n' + 'author: ')
 for author in bookAuthors:
     md.write(author + ', ')
 
 md.write('\n---\n')
 for (chapter, notes) in notes.items():
-    md.write('## ' + chapter + '\n')
+    md.write('# ' + chapter + '\n')
     for note in notes:
         md.write('- ' + note + '\n')
     md.write('\n')
